@@ -10,7 +10,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private PlayerController enemyPlayer;
     [SerializeField] private InputKeys Inputs;
 
+    // ---
+
     [Header("State")]
+    public int maxHealth;
+    public int health;
+
     private PlayerState _state;
     private PlayerState state {
         get {
@@ -39,9 +44,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // ---
+
     [Header("Player References")]
     [SerializeField] private GUI_Player ui;
     [SerializeField] private SpawnArea spawnArea;
+
+    // ---
 
     [Header("Resources")]
     private int _currentResources;
@@ -55,6 +64,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
     public int resourcesPerClick;
+
+    // ---
 
     [Header("Units")]
     [SerializeField] private UnitTier units;
@@ -74,7 +85,7 @@ public class PlayerController : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
 
     private void Awake() {
-        GameController.Instance.OnCycleReady.AddListener(OnCycleReady);
+        //GameController.Instance.OnCycleReady.AddListener(OnCycleReady);
         state = PlayerState.Clicking;
 
         ui.UpdateMoneyText(CurrentResources);
@@ -100,6 +111,7 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
                 if(Input.GetKeyDown(Inputs.Econ)) {
+                    state = PlayerState.Placing;
                     selection = SelectionType.Economy;
                 }
                 break;
@@ -143,21 +155,6 @@ public class PlayerController : MonoBehaviour {
                 break;
             #endregion
         }
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    private void OnCycleReady() {
-        /*foreach(GameObject unit in readyUnits) {
-            unit.SetActive(true);
-        }*/
-
-        /*if(offenseReady) {
-            SpawnOffense();
-        }
-        if(defenseReady) {
-            SpawnDefense();
-        }*/
     }
 
     // -----------------------------------------------------------------------------------------------------------------

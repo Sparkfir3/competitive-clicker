@@ -8,13 +8,14 @@ public class SpawnArea : MonoBehaviour {
     public int selectedPosition;
     public List<Transform> spawnPositions;
 
-    public List<Generator> generators;
+    public List<Unit_Generator> generators;
 
     [HideInInspector] public GameObject[] readyUnits;
 
     // ----------------------------------------------------------------------------------------
 
     private void Awake() {
+        GameController.Instance.OnCycleReady.AddListener(OnCycleReady);
         readyUnits = new GameObject[spawnPositions.Count];
     }
     private void OnCycleReady() {
@@ -22,9 +23,10 @@ public class SpawnArea : MonoBehaviour {
             if(!readyUnits[i])
                 continue;
 
-            Generator gen = readyUnits[i].GetComponent<Generator>();
+            Unit_Generator gen = readyUnits[i].GetComponent<Unit_Generator>();
             if(gen) {
-                gen.LevelUp();
+                Debug.Log($"Level up {gen.name}");
+                //gen.LevelUp();
             } else {
                 readyUnits[i].SetActive(true);
             }
@@ -42,7 +44,6 @@ public class SpawnArea : MonoBehaviour {
 
     private void PositionIndicator() {
         indicator.transform.position = spawnPositions[selectedPosition].position;
-        Debug.Log(spawnPositions[selectedPosition]);
     }
 
     public void MoveLeft() {
