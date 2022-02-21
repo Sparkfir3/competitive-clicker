@@ -15,6 +15,11 @@ public class Unit_Base : MonoBehaviour
 
     public Image currentHPDisplay;
 
+    public float moveSpeed = 1;
+    public float attackSpeed = 1;
+    public float attackRange = 1;
+    public float damage = 100;
+
     protected void Update()
     {
         DisplayHP();
