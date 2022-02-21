@@ -72,8 +72,10 @@ public class SpawnArea : MonoBehaviour {
     // ----------------------------------------------------------------------------------------
 
     public void PrepareUnit(GameObject unit) {
-        if(readyUnits[selectedPosition] != null)
+        if (readyUnits[selectedPosition] != null) {
+            if (!(readyUnits[selectedPosition].GetComponent<Unit_Base>() is Unit_Generator))
             Destroy(readyUnits[selectedPosition]);
+        }
         readyUnits[selectedPosition] = unit;
     }
 

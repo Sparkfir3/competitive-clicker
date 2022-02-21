@@ -653,6 +653,8 @@ MonoBehaviour:
   isActive: 0
   canClick: 0
   isAuto: 0
+  generationRate: 1
+  currentLevel: 0
 --- !u!50 &7544832363322287643
 Rigidbody2D:
   serializedVersion: 4

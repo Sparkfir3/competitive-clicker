@@ -48,7 +48,8 @@ public class Unit_Targeting : MonoBehaviour
             if (unit is Unit_Generator)
             {
                 //Debug.Log("Found a Generator.");
-                return unit.gameObject;
+                if (unit.currentHP > 0)
+                    return unit.gameObject;
             }
         }
 
@@ -81,6 +82,8 @@ public class Unit_Targeting : MonoBehaviour
 
             if (!CheckTargetingArray(collision.gameObject.GetComponent<Unit_Base>()))
             {
+                if (collision.gameObject.GetComponent<Unit_Base>().player == baseUnit.player) return;
+
                 unitsTargeted.Add(collision.gameObject.GetComponent<Unit_Base>());
             }
         }

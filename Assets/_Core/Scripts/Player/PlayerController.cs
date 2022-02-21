@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private PlayerController enemyPlayer;
     [SerializeField] private InputKeys Inputs;
 
+    [SerializeField]
+    private GameObject canvas;
+
     // ---
 
     [Header("State")]
@@ -168,7 +171,11 @@ public class PlayerController : MonoBehaviour {
     private void SpawnOffense() {
         CurrentResources -= units.offCost;
 
-        GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity);
+        //GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity, canvas.transform);
+        //GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition]);
+        GameObject unit = Instantiate(units.offenseUnit, canvas.transform);
+        //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
+        unit.GetComponent<Unit_Base>().player = playerNumber;
         unit.SetActive(false);
         spawnArea.PrepareUnit(unit);
     }
@@ -176,7 +183,11 @@ public class PlayerController : MonoBehaviour {
     private void SpawnDefense() {
         CurrentResources -= units.defCost;
 
-        GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity);
+        //GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity, canvas.transform);
+        //GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition]);
+        GameObject unit = Instantiate(units.defenseUnit, canvas.transform);
+        //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
+        unit.GetComponent<Unit_Base>().player = playerNumber;
         unit.SetActive(false);
         spawnArea.PrepareUnit(unit);
     }

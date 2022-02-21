@@ -8,7 +8,6 @@ public class GUI_Player : MonoBehaviour
 {
     private GUI_Control guicontrol;
 
-    [HideInInspector]
     public int playerNumber;
     [HideInInspector]
     public Color playerColor;
@@ -37,6 +36,7 @@ public class GUI_Player : MonoBehaviour
 
         if (!setup)
         {
+            playerColor = GUI_Control.instance.playerColors[playerNumber];
             healthImage.color = playerColor;
         }
     }

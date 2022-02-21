@@ -23,6 +23,7 @@ public class Unit_Base : MonoBehaviour
     public float attackSpeed = 1; // using Time.time
     public float attackRange = 1;
     public float damage = 100;
+    public bool canAttack = true;
 
     private float attackTimer = 0;
 
@@ -35,6 +36,7 @@ public class Unit_Base : MonoBehaviour
 
     protected void Update()
     {
+        unitColor = GUI_Control.instance.playerColors[player];
         DisplayHP();
         CustomUpdate();
         Targeting();
@@ -112,7 +114,7 @@ public class Unit_Base : MonoBehaviour
     {
         if (targeting != null)
         {
-            if (target != null) // if there is a target
+            if (target != null && canAttack) // if there is a target
             {
                 if (attackTimer >= attackSpeed)
                     attackTimer = 0;

@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
 
     [Header("References")]
     [SerializeField] private Image timerImage;
+    [SerializeField] private Image timerBG;
 
     // ---
 
@@ -38,22 +39,32 @@ public class GameController : MonoBehaviour {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    private void FixedUpdate() {
+    private void Update() {
         if(!GameActive)
             return;
 
-        gameTimer += Time.fixedDeltaTime;
-        cycleTimer += Time.fixedDeltaTime;
+        gameTimer += Time.deltaTime;
+        cycleTimer += Time.deltaTime;
         timerImage.fillAmount = Mathf.Clamp(cycleTimer / cycleLength, 0f, 1f);
+
+        timerBG.color = Color.Lerp(timerBG.color, Color.white, Time.deltaTime*3);
 
         if(gameTimer >= gameLength && gameLength > 0) {
             GameActive = false;
 
-        } else if(cycleTimer >= cycleLength) {
+        } else if(cycleTimer >= cycleLength)
+        {
+            /*Color tempColor = timerImage.color;
+            timerImage.color = timerBG.color;
+            timerBG.color = tempColor;*/
+
+            timerBG.color = timerImage.color;
+
             Debug.Log("Cycle ending");
             OnCycleReady?.Invoke();
             //OnCycleReady.RemoveAllListeners();
             cycleTimer = 0f;
+
         }
     }
 

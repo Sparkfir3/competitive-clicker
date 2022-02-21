@@ -26,10 +26,17 @@ public class Unit_Generator : Unit_Base
         GameController.Instance.OnCycleReady.AddListener(GenerateResources);
     }
 
+    public void Activate()
+    {
+        isActive = true;
+        currentHP = maxHP;
+    }
+
     protected override void CustomUpdate()
     {
         if (isActive)
         {
+            canAttack = true;
             genLevel.SetActive(true);
             mainImage.gameObject.SetActive(true);
             mainImage.color = unitColor;
@@ -60,10 +67,13 @@ public class Unit_Generator : Unit_Base
         }
         else
         {
+            canAttack = false;
             clickSquare.SetActive(false);
             genLevel.SetActive(false);
             mainImage.gameObject.SetActive(false);
             clickText.gameObject.SetActive(false);
+            currentHP = 0;
+            HPDisplay.SetActive(false);
         }
     }
 
@@ -77,6 +87,8 @@ public class Unit_Generator : Unit_Base
             // reset level
             upgradeLevel = 1;
             genLevelText.text = upgradeLevel.ToString();
+
+            canAttack = false;
         }
     }
     // ------------------------------------------------------------------------------------------

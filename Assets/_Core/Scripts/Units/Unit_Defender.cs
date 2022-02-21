@@ -5,5 +5,8 @@ using UnityEngine.UI;
 
 public class Unit_Defender : Unit_Base
 {
-    
+    protected override void CustomUpdate()
+    {
+        mainImage.color = unitColor;
+    }
 }

@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25876db74db94248a44b59408f11549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 0
   enemyPlayer: {fileID: 0}
   Inputs:
     Click: 119
@@ -90,7 +91,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   spawnArea: {fileID: 2833554183248898794}
   resourcesPerClick: 1
-  units: {fileID: 11400000, guid: c1e9db67c8d9cb0478a86cafad6ac149, type: 2}
+  units: {fileID: 11400000, guid: d9e3d46e9007bfe4ea1bbc8ec7eef630, type: 2}
 --- !u!212 &1352401681440734259
 SpriteRenderer:
   m_ObjectHideFlags: 0

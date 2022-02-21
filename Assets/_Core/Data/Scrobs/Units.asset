@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c784f7946c13f44989e61575a22e56, type: 3}
+  m_Name: Units
+  m_EditorClassIdentifier: 
+  offenseUnit: {fileID: 5052443085795521221, guid: 8cca84203ce83674cb4a564faa05a6c5, type: 3}
+  offCost: 1
+  defenseUnit: {fileID: 7785287631363221960, guid: 72a3e0a135f890e4d97e60fae3929b5b, type: 3}
+  defCost: 1
