@@ -7,7 +7,6 @@ public enum SelectionType { None, Offense, Defense, Economy }
 
 public class PlayerController : MonoBehaviour {
 
-    [SerializeField] private GameController game;
     [SerializeField] private PlayerController enemyPlayer;
     [SerializeField] private InputKeys Inputs;
 
@@ -41,11 +40,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     [Header("Player References")]
-    [SerializeField] private PlayerUI ui;
+    [SerializeField] private GUI_Player ui;
     [SerializeField] private SpawnArea spawnArea;
 
     [Header("Resources")]
-    [SerializeField] private int currentResources;
+    private int _currentResources;
+    public int CurrentResources {
+        get {
+            return _currentResources;
+        }
+        set {
+            _currentResources = value;
+            ui.UpdateMoneyText(CurrentResources);
+        }
+    }
     public int resourcesPerClick;
 
     [Header("Units")]
@@ -53,8 +61,6 @@ public class PlayerController : MonoBehaviour {
 
     // ---
 
-    private List<GameObject> readyUnits = new List<GameObject>();
-    private bool offenseReady, defenseReady;
 
     // ---
 
@@ -68,8 +74,10 @@ public class PlayerController : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
 
     private void Awake() {
-        game.OnCycleReady.AddListener(OnCycleReady);
+        GameController.Instance.OnCycleReady.AddListener(OnCycleReady);
         state = PlayerState.Clicking;
+
+        ui.UpdateMoneyText(CurrentResources);
     }
 
     private void Update() {
@@ -80,17 +88,15 @@ public class PlayerController : MonoBehaviour {
                     GainResource();
                 }
                 if(Input.GetKeyDown(Inputs.Offense)) {
-                    if(currentResources >= units.offCost) {
+                    if(CurrentResources >= units.offCost) {
                         state = PlayerState.Placing;
                         selection = SelectionType.Offense;
-                        currentResources -= units.offCost;
                     }
                 }
                 if(Input.GetKeyDown(Inputs.Defense)) {
-                    if(currentResources >= units.defCost) {
+                    if(CurrentResources >= units.defCost) {
                         state = PlayerState.Placing;
                         selection = SelectionType.Defense;
-                        currentResources -= units.defCost;
                     }
                 }
                 if(Input.GetKeyDown(Inputs.Econ)) {
@@ -111,11 +117,12 @@ public class PlayerController : MonoBehaviour {
                     switch(selection) {
                         case SelectionType.Offense:
                             SpawnOffense();
-                            offenseReady = true;
                             break;
                         case SelectionType.Defense:
                             SpawnDefense();
-                            defenseReady = true;
+                            break;
+                        case SelectionType.Economy:
+                            UpgradeGenerator();
                             break;
                     }
                     state = PlayerState.Clicking;
@@ -123,10 +130,10 @@ public class PlayerController : MonoBehaviour {
                 if(Input.GetKeyDown(Inputs.Cancel)) {
                     switch(selection) {
                         case SelectionType.Offense:
-                            currentResources += units.offCost;
+                            CurrentResources += units.offCost;
                             break;
                         case SelectionType.Defense:
-                            currentResources += units.defCost;
+                            CurrentResources += units.defCost;
                             break;
                     }
 
@@ -141,9 +148,9 @@ public class PlayerController : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
 
     private void OnCycleReady() {
-        foreach(GameObject unit in readyUnits) {
+        /*foreach(GameObject unit in readyUnits) {
             unit.SetActive(true);
-        }
+        }*/
 
         /*if(offenseReady) {
             SpawnOffense();
@@ -160,22 +167,27 @@ public class PlayerController : MonoBehaviour {
     // -----------------------------------------------------------------------------------------------------------------
 
     private void GainResource() {
-        currentResources += resourcesPerClick;
-        //ui.UpdateResources(currentResources);
+        CurrentResources += resourcesPerClick;
     }
 
     private void SpawnOffense() {
+        CurrentResources -= units.offCost;
+
         GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity);
         unit.SetActive(false);
-        readyUnits.Add(unit);
-        Debug.Log($"{name} Offense");
+        spawnArea.PrepareUnit(unit);
     }
     
     private void SpawnDefense() {
+        CurrentResources -= units.defCost;
+
         GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity);
         unit.SetActive(false);
-        readyUnits.Add(unit);
-        Debug.Log($"{name} Defense");
+        spawnArea.PrepareUnit(unit);
+    }
+
+    private void UpgradeGenerator() {
+        spawnArea.PrepareGenerator();
     }
 
 }

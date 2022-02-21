@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class GameController : MonoBehaviour {
+
+    public static GameController Instance;
+
+    // ---
     
     public bool GameActive;
     [SerializeField] private List<PlayerController> Players;
@@ -14,6 +18,17 @@ public class GameController : MonoBehaviour {
 
     private float gameTimer, cycleTimer;
     [HideInInspector] public UnityEvent OnCycleReady;
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    private void Awake() {
+        if(Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else {
+            Destroy(gameObject);
+        }
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
 
