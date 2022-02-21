@@ -20,9 +20,11 @@ public class Unit_Base : MonoBehaviour
     public Image currentHPDisplay;
 
     public float moveSpeed = 1;
-    public float attackSpeed = 1;
+    public float attackSpeed = 1; // using Time.time
     public float attackRange = 1;
     public float damage = 100;
+
+    private float attackTimer = 0;
 
     public int friendlyTerritory = 1; // this will be -1 in enemy territory
 
@@ -45,8 +47,9 @@ public class Unit_Base : MonoBehaviour
         if (currentHP <= 0) Destroy(this.gameObject);
     }
 
-    public virtual void GetHurt()
+    public virtual void GetHurt(float dmg)
     {
+        currentHP -= dmg;
         StopAllCoroutines();
         backgroundHPDisplay.color = healthBarHurtColor;
         StartCoroutine(HurtCoroutine());
@@ -109,6 +112,22 @@ public class Unit_Base : MonoBehaviour
     {
         if (targeting != null)
         {
+            if (target != null) // if there is a target
+            {
+                if (attackTimer >= attackSpeed)
+                    attackTimer = 0;
+
+                if (attackTimer == 0)
+                {
+                    // attack
+                    target.GetComponent<Unit_Base>().GetHurt(damage);
+                }
+
+                // cooldown
+                attackTimer += Time.deltaTime;
+
+                return;
+            }
         }
 
         if (moveSpeed > 0)
@@ -128,6 +147,8 @@ public class Unit_Base : MonoBehaviour
         {
             SwitchScreens();
         }
+
+        attackTimer += Time.deltaTime;
     }
 
     protected void SwitchScreens()
@@ -138,5 +159,7 @@ public class Unit_Base : MonoBehaviour
             transform.position.x - (Screen.width / 2), Screen.height - (Screen.height / 9.8f), 0);
 
         friendlyTerritory *= -1;
+
+        transform.rotation = Quaternion.Euler(0,0,180);
     }
 }

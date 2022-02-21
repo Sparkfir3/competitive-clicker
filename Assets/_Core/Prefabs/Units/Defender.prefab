@@ -838,14 +838,14 @@ MonoBehaviour:
   healthBarBGColor: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
   healthBarHurtColor: {r: 1, g: 0.6901961, b: 0, a: 1}
   HPDisplay: {fileID: 2849371422391102446}
-  maxHP: 1000
-  currentHP: 1000
+  maxHP: 1500
+  currentHP: 1500
   backgroundHPDisplay: {fileID: 2583205652406053325}
   currentHPDisplay: {fileID: 442245553005066399}
   moveSpeed: 5
   attackSpeed: 1
   attackRange: 1
-  damage: 100
+  damage: 69
   friendlyTerritory: 1
   targeting: {fileID: 9198758514126594024}
   target: {fileID: 0}
@@ -865,7 +865,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20.36
+  m_Radius: 21.3
 --- !u!50 &7525515434056654956
 Rigidbody2D:
   serializedVersion: 4

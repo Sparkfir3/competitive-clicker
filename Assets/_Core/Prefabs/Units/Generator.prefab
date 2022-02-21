@@ -637,9 +637,9 @@ MonoBehaviour:
   backgroundHPDisplay: {fileID: 2028668781226586740}
   currentHPDisplay: {fileID: 8427526157797288317}
   moveSpeed: 0
-  attackSpeed: 1
+  attackSpeed: 1.25
   attackRange: 1
-  damage: 100
+  damage: 43
   friendlyTerritory: 1
   targeting: {fileID: 1542954025112511344}
   target: {fileID: 0}

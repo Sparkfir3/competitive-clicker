@@ -617,10 +617,10 @@ MonoBehaviour:
   currentHP: 600
   backgroundHPDisplay: {fileID: 706612379742139072}
   currentHPDisplay: {fileID: 3185219289313518482}
-  moveSpeed: 20
-  attackSpeed: 1
+  moveSpeed: 200
+  attackSpeed: 0.5
   attackRange: 1
-  damage: 100
+  damage: 20
   friendlyTerritory: 1
   targeting: {fileID: 5426552018145190902}
   target: {fileID: 0}
