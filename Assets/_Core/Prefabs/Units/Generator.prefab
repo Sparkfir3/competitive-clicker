@@ -649,6 +649,7 @@ MonoBehaviour:
   clickImage: {fileID: 5827238394293227741}
   genLevel: {fileID: 2039648969844750931}
   genLevelText: {fileID: 6509552810974147182}
+  upgradeLevel: 1
   isActive: 0
   canClick: 0
   isAuto: 0
@@ -904,7 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d6f9a5e6ff7934688ed6fed3da5034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUnit: {fileID: 0}
+  baseUnit: {fileID: 3270222294378255912}
   unitsTargeted: []
 --- !u!1 &8522794955344303002
 GameObject:
