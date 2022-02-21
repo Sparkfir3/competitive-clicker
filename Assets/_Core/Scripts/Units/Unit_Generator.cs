@@ -10,6 +10,7 @@ public class Unit_Generator : Unit_Base
     public Image clickImage;
     public GameObject genLevel;
     public Text genLevelText;
+    public int upgradeLevel = 1;
 
     public bool isActive = false;
     public bool canClick = false;
@@ -53,6 +54,19 @@ public class Unit_Generator : Unit_Base
             genLevel.SetActive(false);
             mainImage.gameObject.SetActive(false);
             clickText.gameObject.SetActive(false);
+        }
+    }
+
+    protected override void CheckAlive()
+    {
+        if (currentHP <= 0)
+        {
+            isActive = false;
+            canClick = false;
+            isAuto = false;
+            // reset level
+            upgradeLevel = 1;
+            genLevelText.text = upgradeLevel.ToString();
         }
     }
 }
