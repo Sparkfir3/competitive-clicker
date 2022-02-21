@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 334302290732020022}
   - component: {fileID: 2028668781226586740}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 2531741128833891510}
   - component: {fileID: 8427526157797288317}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: CurrentHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,6 +590,10 @@ MonoBehaviour:
   player: 0
   unitColor: {r: 1, g: 0, b: 0.027450982, a: 1}
   mainImage: {fileID: 5315826498946976526}
+  HPDisplay: {fileID: 8522794955344303002}
+  maxHP: 1000
+  currentHP: 1000
+  currentHPDisplay: {fileID: 8427526157797288317}
   clickText: {fileID: 3074860560296975010}
   clickSquare: {fileID: 377161995033912193}
   clickImage: {fileID: 5827238394293227741}
