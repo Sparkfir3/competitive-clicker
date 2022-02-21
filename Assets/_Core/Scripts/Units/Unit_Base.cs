@@ -10,11 +10,14 @@ public class Unit_Base : MonoBehaviour
     public Image mainImage;
 
     public GameObject HPDisplay;
-    public float maxHP;
-    public float currentHP;
+    public float maxHP = 1000;
+    public float currentHP = 1000;
+
+    public Image currentHPDisplay;
 
     protected void Update()
     {
+        DisplayHP();
         CustomUpdate();
     }
 
@@ -33,6 +36,7 @@ public class Unit_Base : MonoBehaviour
         if (currentHP < maxHP)
         {
             HPDisplay.SetActive(true);
+            currentHPDisplay.fillAmount = currentHP / maxHP;
         }
         else
         {
