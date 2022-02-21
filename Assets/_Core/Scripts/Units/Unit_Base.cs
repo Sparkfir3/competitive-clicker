@@ -9,13 +9,34 @@ public class Unit_Base : MonoBehaviour
     public Color unitColor;
     public Image mainImage;
 
-    void Start()
+    public GameObject HPDisplay;
+    public float maxHP;
+    public float currentHP;
+
+    protected void Update()
     {
-        
+        CustomUpdate();
     }
 
-    void Update()
+    protected virtual void CustomUpdate()
     {
-        
+
+    }
+
+    public void Setup()
+    {
+        mainImage.color = unitColor;
+    }
+
+    public void DisplayHP()
+    {
+        if (currentHP < maxHP)
+        {
+            HPDisplay.SetActive(true);
+        }
+        else
+        {
+            HPDisplay.SetActive(false);
+        }
     }
 }
