@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -15,6 +16,11 @@ public class GameController : MonoBehaviour {
     [Header("Game Settings")]
     public float gameLength;
     public float cycleLength;
+
+    [Header("References")]
+    [SerializeField] private Image timerImage;
+
+    // ---
 
     private float gameTimer, cycleTimer;
     [HideInInspector] public UnityEvent OnCycleReady;
@@ -38,8 +44,11 @@ public class GameController : MonoBehaviour {
 
         gameTimer += Time.fixedDeltaTime;
         cycleTimer += Time.fixedDeltaTime;
-        if(gameTimer >= gameLength) {
+        timerImage.fillAmount = Mathf.Clamp(cycleTimer / cycleLength, 0f, 1f);
+
+        if(gameTimer >= gameLength && gameLength > 0) {
             GameActive = false;
+
         } else if(cycleTimer >= cycleLength) {
             Debug.Log("Cycle ending");
             OnCycleReady?.Invoke();

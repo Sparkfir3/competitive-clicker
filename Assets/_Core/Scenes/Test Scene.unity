@@ -1381,8 +1381,9 @@ MonoBehaviour:
   Players:
   - {fileID: 618667904}
   - {fileID: 1808451521}
-  gameLength: 120
-  cycleLength: 5
+  gameLength: 180
+  cycleLength: 2
+  timerImage: {fileID: 1051283812}
   OnCycleReady:
     m_PersistentCalls:
       m_Calls: []
