@@ -75,7 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25876db74db94248a44b59408f11549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
   enemyPlayer: {fileID: 0}
   Inputs:
     Click: 119
@@ -86,9 +85,10 @@ MonoBehaviour:
     Right: 100
     Confirm: 119
     Cancel: 115
+  maxHealth: 1000
+  health: 1000
   ui: {fileID: 0}
   spawnArea: {fileID: 2833554183248898794}
-  currentResources: 0
   resourcesPerClick: 1
   units: {fileID: 11400000, guid: c1e9db67c8d9cb0478a86cafad6ac149, type: 2}
 --- !u!212 &1352401681440734259
@@ -289,6 +289,8 @@ MonoBehaviour:
   - {fileID: 1810583216700547128}
   - {fileID: 2376614624951428079}
   - {fileID: 5930362106556908402}
+  generators: []
+  readyUnits: []
 --- !u!1 &7069241588034997194
 GameObject:
   m_ObjectHideFlags: 0

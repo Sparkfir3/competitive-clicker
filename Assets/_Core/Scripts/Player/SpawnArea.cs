@@ -10,14 +10,23 @@ public class SpawnArea : MonoBehaviour {
 
     public List<Unit_Generator> generators;
 
+    // ---
+
+    private PlayerController player;
     [HideInInspector] public GameObject[] readyUnits;
 
     // ----------------------------------------------------------------------------------------
 
     private void Awake() {
         GameController.Instance.OnCycleReady.AddListener(OnCycleReady);
+        player = GetComponentInParent<PlayerController>();
         readyUnits = new GameObject[spawnPositions.Count];
+
+        foreach(Unit_Generator generator in generators) {
+            generator.player = player.playerNumber;
+        }
     }
+
     private void OnCycleReady() {
         for(int i = 0; i < readyUnits.Length; i++) {
             if(!readyUnits[i])
@@ -26,7 +35,7 @@ public class SpawnArea : MonoBehaviour {
             Unit_Generator gen = readyUnits[i].GetComponent<Unit_Generator>();
             if(gen) {
                 Debug.Log($"Level up {gen.name}");
-                //gen.LevelUp();
+                gen.LevelUp();
             } else {
                 readyUnits[i].SetActive(true);
             }
@@ -68,8 +77,14 @@ public class SpawnArea : MonoBehaviour {
         readyUnits[selectedPosition] = unit;
     }
 
-    public void PrepareGenerator() {
-        readyUnits[selectedPosition] = generators[selectedPosition].gameObject;
+    public bool PrepareGenerator() {
+        int cost = generators[selectedPosition].GetCost();
+        if(player.CurrentResources >= cost) {
+            readyUnits[selectedPosition] = generators[selectedPosition].gameObject;
+            player.CurrentResources -= cost;
+            return true;
+        }
+        return false;
     }
 
 }

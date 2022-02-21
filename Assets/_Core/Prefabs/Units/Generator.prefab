@@ -602,6 +602,8 @@ MonoBehaviour:
   isActive: 0
   canClick: 0
   isAuto: 0
+  generationRate: 1
+  currentLevel: 0
 --- !u!1 &6814430748215920026
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public enum SelectionType { None, Offense, Defense, Economy }
 
 public class PlayerController : MonoBehaviour {
 
+    #region Variables
+
+    public int playerNumber;
     [SerializeField] private PlayerController enemyPlayer;
     [SerializeField] private InputKeys Inputs;
 
@@ -82,6 +85,8 @@ public class PlayerController : MonoBehaviour {
         public KeyCode Left, Right, Confirm, Cancel;
     }
 
+    #endregion
+
     // -----------------------------------------------------------------------------------------------------------------
 
     private void Awake() {
@@ -129,26 +134,19 @@ public class PlayerController : MonoBehaviour {
                     switch(selection) {
                         case SelectionType.Offense:
                             SpawnOffense();
+                            state = PlayerState.Clicking;
                             break;
                         case SelectionType.Defense:
                             SpawnDefense();
+                            state = PlayerState.Clicking;
                             break;
                         case SelectionType.Economy:
-                            UpgradeGenerator();
+                            if(UpgradeGenerator())
+                                state = PlayerState.Clicking;
                             break;
                     }
-                    state = PlayerState.Clicking;
                 }
                 if(Input.GetKeyDown(Inputs.Cancel)) {
-                    switch(selection) {
-                        case SelectionType.Offense:
-                            CurrentResources += units.offCost;
-                            break;
-                        case SelectionType.Defense:
-                            CurrentResources += units.defCost;
-                            break;
-                    }
-
                     selection = SelectionType.None;
                     state = PlayerState.Clicking;
                 }
@@ -183,8 +181,8 @@ public class PlayerController : MonoBehaviour {
         spawnArea.PrepareUnit(unit);
     }
 
-    private void UpgradeGenerator() {
-        spawnArea.PrepareGenerator();
+    private bool UpgradeGenerator() {
+        return spawnArea.PrepareGenerator();
     }
 
 }

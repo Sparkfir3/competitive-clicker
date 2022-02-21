@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     // ---
     
     public bool GameActive;
-    [SerializeField] private List<PlayerController> Players;
+    public List<PlayerController> Players;
 
     [Header("Game Settings")]
     public float gameLength;

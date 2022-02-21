@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Unit_Generator : Unit_Base
 {
+    
+    [Header("Generator")]
     public Text clickText;
     public GameObject clickSquare;
     public Image clickImage;
@@ -14,6 +16,14 @@ public class Unit_Generator : Unit_Base
     public bool isActive = false;
     public bool canClick = false;
     public bool isAuto = false;
+
+    [Header("Stats")]
+    [SerializeField] private int generationRate;
+    [SerializeField] private int currentLevel = 0;
+
+    protected void Awake() {
+        GameController.Instance.OnCycleReady.AddListener(GenerateResources);
+    }
 
     protected override void CustomUpdate()
     {
@@ -55,4 +65,29 @@ public class Unit_Generator : Unit_Base
             clickText.gameObject.SetActive(false);
         }
     }
+
+    // ------------------------------------------------------------------------------------------
+
+    private void GenerateResources() {
+        if(!isActive)
+            return;
+
+        GameController.Instance.Players[player].CurrentResources += generationRate * currentLevel;
+        Debug.Log($"Generating {generationRate * currentLevel} for player {player}");
+    }
+
+    public void LevelUp() {
+        if(!isActive) {
+            isActive = true;
+        }
+        currentLevel++;
+        genLevelText.text = $"{currentLevel}";
+    }
+
+    public int GetCost() {
+        if(currentLevel == 0)
+            return 5;
+        return currentLevel * 5;
+    }
+
 }
