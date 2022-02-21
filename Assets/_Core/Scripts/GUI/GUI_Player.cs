@@ -40,4 +40,8 @@ public class GUI_Player : MonoBehaviour
             healthImage.color = playerColor;
         }
     }
+
+    public void UpdateMoneyText(int value) {
+        moneyAmountText.text = $"{value}";
+    }
 }
