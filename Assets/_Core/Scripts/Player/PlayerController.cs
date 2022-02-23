@@ -172,7 +172,8 @@ public class PlayerController : MonoBehaviour {
         CurrentResources -= units.offCost;
 
         //GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity, canvas.transform);
-        //GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition]);
+        //GameObject unit = Instantiate(units.offenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition], true);
+        //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
         GameObject unit = Instantiate(units.offenseUnit, canvas.transform);
         //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
         unit.GetComponent<Unit_Base>().player = playerNumber;
@@ -184,7 +185,8 @@ public class PlayerController : MonoBehaviour {
         CurrentResources -= units.defCost;
 
         //GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition].position, Quaternion.identity, canvas.transform);
-        //GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition]);
+        //GameObject unit = Instantiate(units.defenseUnit, spawnArea.spawnPositions[spawnArea.selectedPosition], true);
+        //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
         GameObject unit = Instantiate(units.defenseUnit, canvas.transform);
         //unit.transform.position = spawnArea.spawnPositions[spawnArea.selectedPosition].position;
         unit.GetComponent<Unit_Base>().player = playerNumber;

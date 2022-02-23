@@ -155,10 +155,12 @@ public class Unit_Base : MonoBehaviour
 
     protected void SwitchScreens()
     {
-        //float xOffset = 
+        float xOffset = transform.position.x - GUI_Control.instance.playerGUIs[player].position.x;
+
+        int targetSide = Mathf.Abs(player - 1);
 
         transform.position = new Vector3(
-            transform.position.x - (Screen.width / 2), Screen.height - (Screen.height / 9.8f), 0);
+            GUI_Control.instance.playerGUIs[targetSide].position.x + xOffset, Screen.height - (Screen.height / 9.8f), 0);
 
         friendlyTerritory *= -1;
 

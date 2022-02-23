@@ -72,8 +72,9 @@ public class Unit_Generator : Unit_Base
             genLevel.SetActive(false);
             mainImage.gameObject.SetActive(false);
             clickText.gameObject.SetActive(false);
-            currentHP = 0;
-            HPDisplay.SetActive(false);
+
+            /*currentHP = 0;
+            HPDisplay.SetActive(false);*/
         }
     }
 

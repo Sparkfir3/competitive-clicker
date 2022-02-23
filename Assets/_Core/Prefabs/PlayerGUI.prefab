@@ -995,6 +995,7 @@ MonoBehaviour:
   healthImage: {fileID: 2113014420}
   moneyAmountText: {fileID: 837326551}
   setup: 0
+  genHandler: {fileID: 7132475155275890283}
 --- !u!1001 &3006858895146435751
 PrefabInstance:
   m_ObjectHideFlags: 0

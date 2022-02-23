@@ -17,6 +17,8 @@ public class GUI_Player : MonoBehaviour
 
     public bool setup = false;
 
+    public Unit_GeneratorHandler genHandler;
+
     void Start()
     {
         
